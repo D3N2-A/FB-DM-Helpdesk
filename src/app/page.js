@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
 import { EMAIL_REGEX } from "../../Utils/validation";
-import { auth } from "../../connectors/firebase";
+import { auth, db } from "../../connectors/firebase";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import styles from "./page.module.scss";
@@ -13,6 +13,7 @@ import {
   initFacebookSdk,
   loadFacebookSDK,
 } from "../../Utils/FIrebaseSDK";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Home() {
   const [tab, setTab] = useState("login");
@@ -58,6 +59,12 @@ export default function Home() {
     )
       .then((userCredential) => {
         const user = userCredential.user;
+        let data = {
+          email: user.email,
+          emailVerified: user.emailVerified,
+          createdAt: user.metadata.creationTime,
+        };
+        setDoc(doc(db, "users", user.uid), data);
         console.log(user);
       })
       .catch((error) => {
