@@ -3,4 +3,45 @@
   flex-direction: row;
   width: 100vh;
   height: 100vh;
+
+  .first {
+    display: flex;
+    flex-direction: column;
+    width: 5vw;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 1rem;
+    gap: 1rem;
+  }
+}
+
+.iconPrimary {
+  width: 100%;
+  background-color: white;
+  color: #1e4d91;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.445, 0.05, 0.55, 1.95);
+}
+
+.icon:hover {
+  scale: 1.125;
+}
+.iconPrimary:hover {
+  scale: 1.125;
 }
