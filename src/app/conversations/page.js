@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./page.module.scss";
-import { AiFillDribbbleSquare } from "react-icons/ai";
+import { AiFillDribbbleSquare, AiOutlineReload } from "react-icons/ai";
 import { FaChartArea, FaInbox } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
+import { VscListSelection } from "react-icons/vsc";
 
 function Conversations() {
   return (
@@ -19,6 +20,29 @@ function Conversations() {
         </div>
         <div className={styles.icon}>
           <FaChartArea size={25} />
+        </div>
+      </div>
+      <div className={styles.second}>
+        <div className={styles.heading}>
+          <VscListSelection color="#b1b1b1" />
+          <h1>Conversations</h1>
+          <AiOutlineReload color="#686868" className={styles.last} />
+        </div>
+
+        <div className={styles.chatContainer}>
+          <div className={`${styles.chat} ${styles.primary}`}>
+            <div className={styles.top}>
+              <input type="checkbox" name="" id="" />
+              <div className={styles.title}>Amit RG</div>
+              <div className={styles.time}>10m</div>
+            </div>
+            <div className={styles.bottom}>
+              <div className={styles.messageHead}>Awesome Product</div>
+              <div className={styles.messageBody}>
+                Lorem ipsum dolor sit amet consectetur adipisi...
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

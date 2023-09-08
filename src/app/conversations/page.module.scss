@@ -14,6 +14,102 @@
     padding-top: 1rem;
     gap: 1rem;
   }
+
+  .second {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 100%;
+    background: white;
+    justify-content: flex-start;
+    align-items: center;
+
+    .heading {
+      display: flex;
+      flex-direction: row;
+      padding: 0.765rem;
+      border: 1px solid #ededed;
+      height: 60px;
+      width: 100%;
+      align-items: center;
+      gap: 5px;
+
+      h1 {
+        color: #171918;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .last {
+        margin-left: auto;
+        cursor: pointer;
+      }
+    }
+
+    .chatContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: 100%;
+
+      .chat {
+        width: 100%;
+        padding: 5px 0.765rem;
+        color: black;
+        gap: 10px;
+        display: flex;
+        justify-content: space-around;
+        height: 100px;
+        flex-direction: column;
+        border-bottom: 1px solid #ededed;
+        transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        transform-origin: left;
+        cursor: pointer;
+
+        &.chat:hover {
+          transform: scaleX(1.015);
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        &.primary {
+          background-color: #edeef0;
+        }
+
+        .top {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 5px;
+
+          .title {
+            font-size: 14px;
+          }
+
+          .time {
+            margin-left: auto;
+            font-size: 0.765rem;
+          }
+        }
+
+        .bottom {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          justify-content: center;
+          align-items: flex-start;
+
+          .messageHead {
+            font-size: 0.765rem;
+            font-weight: 500;
+          }
+          .messageBody {
+            font-size: 0.765rem;
+            color: #949597;
+          }
+        }
+      }
+    }
+  }
 }
 
 .iconPrimary {
