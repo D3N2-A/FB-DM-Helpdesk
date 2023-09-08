@@ -1,17 +1,15 @@
 "use client";
-import styles from "./page.module.scss";
-import { useEffect, useState } from "react";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
 } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { RecoilRoot } from "recoil";
 import { EMAIL_REGEX } from "../../Utils/validation";
 import { auth } from "../../connectors/firebase";
-import { RecoilRoot, useRecoilState } from "recoil";
-import { userState } from "../../store/userAtom";
-import { useRouter } from "next/navigation";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import styles from "./page.module.scss";
 
 export default function Home() {
   const [tab, setTab] = useState("login");
