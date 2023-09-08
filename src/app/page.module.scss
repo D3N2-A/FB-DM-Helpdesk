@@ -27,4 +27,15 @@
       cursor: pointer;
     }
   }
+
+  .error {
+    display: flex;
+    color: red;
+    flex-direction: row;
+    font-size: 0.765rem;
+    font-weight: 400;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 1rem;
+  }
 }
