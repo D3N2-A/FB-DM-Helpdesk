@@ -65,7 +65,7 @@ export default function Home() {
           emailVerified: user.emailVerified,
           createdAt: user.metadata.creationTime,
         };
-        setDoc(doc(db, "users", user.uid), data);
+        makeUserDoc(data);
         console.log(user);
       })
       .catch((error) => {
@@ -75,6 +75,11 @@ export default function Home() {
       });
   };
 
+  const makeUserDoc = async () => {
+    await setDoc(doc(db, "users", user.uid), data).then((res) => {
+      console.log("User stored in db");
+    });
+  };
   const handleChage = (e) => {
     setCredentials((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
