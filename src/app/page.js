@@ -11,6 +11,7 @@ import styles from "./page.module.scss";
 import {
   getFacebookLoginStatus,
   initFacebookSdk,
+  loadFacebookSDK,
 } from "../../Utils/FIrebaseSDK";
 
 export default function Home() {
@@ -27,16 +28,13 @@ export default function Home() {
   const authRef = auth;
 
   useEffect(() => {
-    initFacebookSdk().then(() => {
-      getFacebookLoginStatus().then((response) => {
-        if (response == null) {
-          console.log("No login status for the person");
-        } else {
-          console.log(response);
-        }
-      });
-    });
+    loadFacebookSDK();
+    localStorage.setItem(
+      "person",
+      JSON.stringify({ status: "", accessToken: "" })
+    );
   }, []);
+
   useEffect(() => {
     authRef.onAuthStateChanged((user) => {
       if (user) {

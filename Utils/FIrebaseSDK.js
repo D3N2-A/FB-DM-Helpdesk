@@ -1,3 +1,25 @@
+// export const loadFacebookSDK = () => {
+//   const script = document.createElement("script");
+//   script.src = "https://connect.facebook.net/en_US/sdk.js";
+//   script.async = false; // Load synchronously
+//   document.head.appendChild(script);
+// };
+
+export function loadFacebookSDK() {
+  if (document.getElementById("facebook-jssdk")) {
+    return;
+  }
+  const script = document.createElement("script");
+  script.src = "https://connect.facebook.net/en_US/sdk.js";
+  script.async = true;
+  script.id = "facebook-jssdk";
+  script.onload = function () {
+    console.log("Facebook SDK loaded.");
+    initFacebookSdk();
+  };
+  document.head.appendChild(script);
+}
+
 export const initFacebookSdk = () => {
   return new Promise((resolve, reject) => {
     // Load the Facebook SDK asynchronously
@@ -5,6 +27,7 @@ export const initFacebookSdk = () => {
       window.FB.init({
         appId: `${process.env.NEXT_PUBLIC_FB_ID}`,
         cookie: true,
+        autoLogAppEvents: true,
         xfbml: true,
         version: "v17.0",
       });

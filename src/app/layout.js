@@ -11,12 +11,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <script
+      {/* <script
         async
         defer
         crossorigin="anonymous"
         src="https://connect.facebook.net/en_US/all.js"
-      ></script>
+      ></script> */}
       <body className={inter.className}>
         <div className="fb-root">{children}</div>
       </body>
