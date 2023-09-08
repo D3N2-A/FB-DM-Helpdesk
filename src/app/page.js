@@ -77,7 +77,7 @@ export default function Home() {
 
   const makeUserDoc = async () => {
     await setDoc(doc(db, "users", user.uid), data).then((res) => {
-      console.log("User stored in db");
+      console.log("User stored in db")
     });
   };
   const handleChage = (e) => {
