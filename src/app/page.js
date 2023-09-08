@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import {
@@ -9,6 +9,9 @@ import {
 } from "firebase/auth";
 import { EMAIL_REGEX } from "../../Utils/validation";
 import { auth } from "../../connectors/firebase";
+import { RecoilRoot, useRecoilState } from "recoil";
+import { userState } from "../../store/userAtom";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [tab, setTab] = useState("login");
@@ -19,28 +22,19 @@ export default function Home() {
     password: "",
   });
 
-  /**
-   * @async
-   * @function handleLogin
-   * @returns void
-   */
-  const handleLogin = async () => {
-    setError("");
-    if (!EMAIL_REGEX.test(credentials.email.trim())) {
-      setError("Invalid Email");
-      return;
-    }
-    signInWithEmailAndPassword(auth, credentials.email, credentials.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
-  };
+  const router = useRouter();
+
+  const authRef = auth;
+
+  useEffect(() => {
+    authRef.onAuthStateChanged((user) => {
+      if (user) {
+        router.push("/configure");
+      } else {
+        return;
+      }
+    });
+  }, [authRef]);
 
   const handleSignUp = async () => {
     setError("");
@@ -71,53 +65,56 @@ export default function Home() {
   };
   return (
     <main className={styles.main}>
-      <div className={styles.container}>
-        {tab === "login" ? (
-          <Login
-            handleLogin={handleLogin}
-            credentials={credentials}
-            setCredentials={setCredentials}
-            handleChange={handleChage}
-          />
-        ) : (
-          <SignUp
-            handleSignUp={handleSignUp}
-            credentials={credentials}
-            setCredentials={setCredentials}
-            handleChange={handleChage}
-          />
-        )}
+      <RecoilRoot>
+        {" "}
+        <div className={styles.container}>
+          {tab === "login" ? (
+            <Login
+              credentials={credentials}
+              setCredentials={setCredentials}
+              handleChange={handleChage}
+              setError={setError}
+            />
+          ) : (
+            <SignUp
+              handleSignUp={handleSignUp}
+              credentials={credentials}
+              setCredentials={setCredentials}
+              handleChange={handleChage}
+            />
+          )}
 
-        {error && error?.length > 0 && (
-          <div className={styles.error}>{error}</div>
-        )}
+          {error && error?.length > 0 && (
+            <div className={styles.error}>{error}</div>
+          )}
 
-        {tab === "login" ? (
-          <div className={styles.footer}>
-            New to HelpDesk?{" "}
-            <div
-              className={styles.link}
-              onClick={() => {
-                setTab("signup");
-              }}
-            >
-              Sign Up
+          {tab === "login" ? (
+            <div className={styles.footer}>
+              New to HelpDesk?{" "}
+              <div
+                className={styles.link}
+                onClick={() => {
+                  setTab("signup");
+                }}
+              >
+                Sign Up
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className={styles.footer}>
-            Already have an account?{" "}
-            <div
-              className={styles.link}
-              onClick={() => {
-                setTab("login");
-              }}
-            >
-              Login
+          ) : (
+            <div className={styles.footer}>
+              Already have an account?{" "}
+              <div
+                className={styles.link}
+                onClick={() => {
+                  setTab("login");
+                }}
+              >
+                Login
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </RecoilRoot>
     </main>
   );
 }
