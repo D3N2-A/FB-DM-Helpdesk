@@ -1,0 +1,55 @@
+.card {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  margin-top: 5px;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .label {
+    color: #464646;
+    font-weight: 600;
+    font-size: 0.865rem;
+  }
+
+  input {
+    color: black;
+    border: 2px solid #d4d4d4;
+    background-color: white;
+    border-radius: 4px;
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+  }
+}
+
+.btnPrimary {
+  margin-top: 1rem;
+  width: 100%;
+  height: 40px;
+  color: white;
+  background-color: #1d4e8e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.btnPrimary:hover {
+  scale: 1.025;
+}
