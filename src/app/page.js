@@ -60,6 +60,7 @@ export default function Home() {
       .then((userCredential) => {
         const user = userCredential.user;
         let data = {
+          name: credentials?.name,
           email: user.email,
           emailVerified: user.emailVerified,
           createdAt: user.metadata.creationTime,
