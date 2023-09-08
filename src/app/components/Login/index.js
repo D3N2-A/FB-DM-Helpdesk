@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../connectors/firebase";
 import { userState } from "../../../../store/userAtom";
 import { useRecoilState } from "recoil";
+import { EMAIL_REGEX } from "../../../../Utils/validation";
 
 function Login({ setError, handleChange, credentials }) {
   const [user, setUser] = useRecoilState(userState);
@@ -16,7 +17,6 @@ function Login({ setError, handleChange, credentials }) {
     signInWithEmailAndPassword(auth, credentials.email, credentials.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
         setUser({
           authenticated: true,
           isLoading: false,

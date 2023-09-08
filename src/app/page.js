@@ -1,7 +1,5 @@
 "use client";
-import {
-  createUserWithEmailAndPassword
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
@@ -10,6 +8,10 @@ import { auth } from "../../connectors/firebase";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import styles from "./page.module.scss";
+import {
+  getFacebookLoginStatus,
+  initFacebookSdk,
+} from "../../Utils/FIrebaseSDK";
 
 export default function Home() {
   const [tab, setTab] = useState("login");
@@ -24,6 +26,17 @@ export default function Home() {
 
   const authRef = auth;
 
+  useEffect(() => {
+    initFacebookSdk().then(() => {
+      getFacebookLoginStatus().then((response) => {
+        if (response == null) {
+          console.log("No login status for the person");
+        } else {
+          console.log(response);
+        }
+      });
+    });
+  }, []);
   useEffect(() => {
     authRef.onAuthStateChanged((user) => {
       if (user) {
