@@ -5,6 +5,7 @@ import { FaChartArea, FaInbox } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
 import { VscListSelection } from "react-icons/vsc";
 import Chat from "../components/Chat/page";
+import Details from "../components/Details/page";
 
 function Conversations() {
   return (
@@ -49,6 +50,10 @@ function Conversations() {
 
       <div className={styles.third}>
         <Chat />
+      </div>
+
+      <div className={styles.fourth}>
+        <Details />
       </div>
     </div>
   );
