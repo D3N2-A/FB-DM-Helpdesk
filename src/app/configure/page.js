@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 
 function Configure() {
   const router = useRouter();
-  let person = JSON.parse(localStorage.getItem("person"));
   const [isConnected, setIsConnected] = useState(false);
   const handleConnect = async () => {
     initFacebookSdk().then(() => {
