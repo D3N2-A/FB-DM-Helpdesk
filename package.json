@@ -23,5 +23,8 @@
     "recoil": "^0.7.7",
     "sass": "^1.66.1",
     "ws": "^8.14.1"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13"
   }
 }

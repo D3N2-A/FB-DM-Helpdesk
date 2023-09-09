@@ -34,7 +34,9 @@ function Chat({ chatData }) {
               </div>
             );
           })}
-        {Object.keys(chatData).length == 0 && <div>No Conversations</div>}
+        {Object?.keys(chatData || {}).length == 0 && (
+          <div>No Conversations</div>
+        )}
       </div>
       <input
         type="text"
