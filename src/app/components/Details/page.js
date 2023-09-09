@@ -7,7 +7,9 @@ function Details() {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <div className={styles.photo}></div>
+        <div className={styles.photo}>
+          <img src="avatar.png" alt="" />
+        </div>
         <div className={styles.status}>
           <h1>Amit RG</h1>
           <p>online</p>

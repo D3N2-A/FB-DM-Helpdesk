@@ -11,7 +11,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     gap: 10px;
+
+    .photo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        object-fit: cover;
+      }
+    }
 
     .status {
       display: flex;
