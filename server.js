@@ -1,11 +1,6 @@
 const express = require("express");
 const https = require("https");
 const app = express();
-let fs = require("fs");
-let options = {
-  pfx: fs.readFileSync("./certificate.pfx"),
-  passphrase: "1012",
-};
 const port = 4000;
 
 app.get("/", (req, res) => {
@@ -28,8 +23,6 @@ app.get("/messaging-webhook", (req, res) => {
   }
 });
 
-let secure = https.createServer(options, app);
-
-secure.listen(port, function () {
+app.listen(port, function () {
   console.log("localhost started on", port);
 });
