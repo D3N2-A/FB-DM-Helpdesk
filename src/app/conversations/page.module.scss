@@ -1,13 +1,12 @@
 .container {
   display: flex;
   flex-direction: row;
-  width: 100vh;
   height: 100vh;
 
   .first {
     display: flex;
     flex-direction: column;
-    width: 5vw;
+    width: 5%;
     height: 100%;
     justify-content: flex-start;
     align-items: center;
@@ -18,7 +17,7 @@
   .second {
     display: flex;
     flex-direction: column;
-    width: 25vw;
+    width: 20%;
     height: 100%;
     background: white;
     justify-content: flex-start;
@@ -109,6 +108,10 @@
         }
       }
     }
+  }
+
+  .third {
+    width: 50%;
   }
 }
 
