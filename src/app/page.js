@@ -28,13 +28,7 @@ export default function Home() {
 
   const authRef = auth;
 
-  useEffect(() => {
-    loadFacebookSDK();
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ status: "", accessToken: "" })
-    );
-  }, []);
+ 
 
   useEffect(() => {
     authRef.onAuthStateChanged((user) => {

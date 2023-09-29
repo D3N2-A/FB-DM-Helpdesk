@@ -7,14 +7,39 @@ import { BsPeopleFill } from "react-icons/bs";
 import { VscListSelection } from "react-icons/vsc";
 import Chat from "../components/Chat/page";
 import Details from "../components/Details/page";
+import { getFacebookLoginStatus } from "../../../Utils/FIrebaseSDK";
 
 function Conversations() {
   const [chatData, setChatData] = useState({});
+  const pageID = localStorage.getItem("pageID");
+  const pageToken = localStorage.getItem("pageToken");
+  useEffect(() => {
+    fetchConversations(pageID, pageToken);
+  }, []);
+
+  //----------------------Conversations------------------------------//
+  const [conversations, setConversations] = useState([]);
+  const fetchConversations = async (pageID, pageToken) => {
+    fetch(
+      `https://graph.facebook.com/v17.0/${pageID}/conversations?fields=participants&platform=MESSENGER&access_token=${pageToken}`
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          res.json().then((val) => {
+            setConversations(val.data);
+            console.log(val);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     const ws = new WebSocket("wss://expressjs-production-623d.up.railway.app");
 
     ws.addEventListener("open", (event) => {
-      console.log("WebSocket connection opened:", event);
+      console.log("WebSocket connection opened:");
     });
 
     ws.addEventListener("message", (event) => {
@@ -49,32 +74,25 @@ function Conversations() {
         </div>
 
         <div className={styles.chatContainer}>
-          <div className={`${styles.chat} ${styles.primary}`}>
-            <div className={styles.top}>
-              <input type="checkbox" name="" id="" />
-              <div className={styles.title}>Amit RG</div>
-              <div className={styles.time}>10m</div>
-            </div>
-            <div className={styles.bottom}>
-              <div className={styles.messageHead}>Awesome Product</div>
-              <div className={styles.messageBody}>
-                Lorem ipsum dolor sit amet consectetur adipisi...
-              </div>
-            </div>
-          </div>
-          <div className={styles.chat}>
-            <div className={styles.top}>
-              <input type="checkbox" name="" id="" />
-              <div className={styles.title}>Hiten Saxena</div>
-              <div className={styles.time}>10m</div>
-            </div>
-            <div className={styles.bottom}>
-              <div className={styles.messageHead}>Available in store</div>
-              <div className={styles.messageBody}>
-                Hi, do you have any in stock....
-              </div>
-            </div>
-          </div>
+          {conversations &&
+            conversations.map((chat, index) => {
+              console.log(chat);
+              return (
+                <div key={index} className={`${styles.chat} ${styles.primary}`}>
+                  <div className={styles.top}>
+                    <input type="checkbox" name="" id="" />
+                    <div className={styles.title}>
+                      {chat?.participants?.data[0]?.name}
+                    </div>
+                    <div className={styles.time}>10m</div>
+                  </div>
+                  <div className={styles.bottom}>
+                    <div className={styles.messageHead}>Awesome Product</div>
+                    <div className={styles.messageBody}>id:{chat?.id}</div>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
 

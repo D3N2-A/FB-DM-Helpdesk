@@ -54,7 +54,7 @@ function Configure() {
 
   const handleIntegration = (page) => {
     localStorage.setItem("pageToken", page?.access_token);
-    localStorage.setItem("pageId", page?.id);
+    localStorage.setItem("pageID", page?.id);
     router.push("/conversations");
   };
   const deleteIntegration = () => {
