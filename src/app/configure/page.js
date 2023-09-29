@@ -5,6 +5,9 @@ import { fbLogin, fbLogout, initFacebookSdk } from "../../../Utils/FIrebaseSDK";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../store/userAtom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toastSuccess } from "../../../Utils/theme";
 
 function Configure() {
   const router = useRouter();
@@ -27,11 +30,13 @@ function Configure() {
 
           setUser({
             authenticated: true,
-            userID: response?.authResponse?.accessToken,
+            userID: response?.authResponse?.userID,
             accessToken: response?.authResponse?.accessToken,
             isLoading: false,
           });
           setIsConnected(true);
+          toast.success("Page integrated successfully", toastSuccess);
+          getConversations();
         } else {
           console.log("Some Error Occured");
         }
@@ -47,6 +52,27 @@ function Configure() {
     setIsConnected(false);
   };
 
+  //---------------------Fetching Pages info---------------------------//
+  const [pages, setPages] = useState([]);
+  const getConversations = async () => {
+    const res = await fetch(
+      `https://graph.facebook.com/v17.0/${user.userID}/accounts?access_token=${user.accessToken}`
+    )
+      .then((res) => {
+        res
+          .json()
+          .then((val) => {
+            setPages(val?.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        toast.warn("Some error occured", toastSuccess);
+      });
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>
@@ -57,9 +83,24 @@ function Configure() {
               <div className={styles.btnDanger} onClick={deleteIntegration}>
                 Delete Integration
               </div>
-              <div className={styles.btnPrimary} onClick={handleIntegration}>
-                Reply To Messages
-              </div>
+
+              <h1 className={styles.title}>Select page and continue</h1>
+              {pages &&
+                pages.length > 0 &&
+                pages.map((page, index) => {
+                  return (
+                    <>
+                      {" "}
+                      <div
+                        className={styles.btnPrimary}
+                        onClick={handleIntegration}
+                      >
+                        {page?.name}{" "}
+                        <div className={styles.category}>{page?.category}</div>
+                      </div>
+                    </>
+                  );
+                })}
             </>
           ) : (
             <div className={styles.btnPrimary} onClick={handleConnect}>
@@ -68,6 +109,7 @@ function Configure() {
           )}
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 }

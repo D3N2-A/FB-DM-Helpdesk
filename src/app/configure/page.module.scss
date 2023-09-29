@@ -64,6 +64,16 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  .category {
+    font-size: 0.765rem;
+    margin-left: 0.3rem;
+  }
+
+  .category::before {
+    content: "•";
+    color: white;
+  }
 }
 
 .btnPrimary:hover {

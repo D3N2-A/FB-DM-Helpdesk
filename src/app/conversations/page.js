@@ -11,13 +11,10 @@ import Details from "../components/Details/page";
 function Conversations() {
   const [chatData, setChatData] = useState({});
   useEffect(() => {
-    const ws = new WebSocket("wss://expressjs-production-623d.up.railway.app"); // Replace with your server's URL and port
+    const ws = new WebSocket("wss://expressjs-production-623d.up.railway.app");
 
     ws.addEventListener("open", (event) => {
       console.log("WebSocket connection opened:", event);
-      // Send data to the server when the connection is established
-      // For example:
-      // ws.send('Hello, server!');
     });
 
     ws.addEventListener("message", (event) => {
