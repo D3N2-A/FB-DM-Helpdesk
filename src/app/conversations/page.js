@@ -27,7 +27,6 @@ function Conversations() {
         if (res.status === 200) {
           res.json().then((val) => {
             setConversations(val.data);
-            console.log(val);
           });
         }
       })
@@ -76,7 +75,6 @@ function Conversations() {
         <div className={styles.chatContainer}>
           {conversations &&
             conversations.map((chat, index) => {
-              console.log(chat);
               return (
                 <div
                   key={index}

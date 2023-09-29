@@ -16,7 +16,6 @@ function Chat({ chatData }) {
 
   //Get Messages from A conversation
   const fetchMessages = async (messageId, pageToken) => {
-    setIsLoading(true);
     fetch(
       `https://graph.facebook.com/v17.0/${messageId}?fields=messages&access_token=${pageToken}`
     )
@@ -34,6 +33,7 @@ function Chat({ chatData }) {
   };
 
   const getMessageSeq = async (messagesArray, pageToken) => {
+    setIsLoading(true);
     for (const message of messagesArray) {
       await makeAPICall(message.id, pageToken);
     }
