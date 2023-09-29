@@ -31,7 +31,7 @@ export default function Home() {
   useEffect(() => {
     loadFacebookSDK();
     localStorage.setItem(
-      "person",
+      "user",
       JSON.stringify({ status: "", accessToken: "" })
     );
   }, []);
@@ -82,56 +82,54 @@ export default function Home() {
   };
   return (
     <main className={styles.main}>
-      <RecoilRoot>
-        {" "}
-        <div className={styles.container}>
-          {tab === "login" ? (
-            <Login
-              credentials={credentials}
-              setCredentials={setCredentials}
-              handleChange={handleChage}
-              setError={setError}
-            />
-          ) : (
-            <SignUp
-              handleSignUp={handleSignUp}
-              credentials={credentials}
-              setCredentials={setCredentials}
-              handleChange={handleChage}
-            />
-          )}
+      {" "}
+      <div className={styles.container}>
+        {tab === "login" ? (
+          <Login
+            credentials={credentials}
+            setCredentials={setCredentials}
+            handleChange={handleChage}
+            setError={setError}
+          />
+        ) : (
+          <SignUp
+            handleSignUp={handleSignUp}
+            credentials={credentials}
+            setCredentials={setCredentials}
+            handleChange={handleChage}
+          />
+        )}
 
-          {error && error?.length > 0 && (
-            <div className={styles.error}>{error}</div>
-          )}
+        {error && error?.length > 0 && (
+          <div className={styles.error}>{error}</div>
+        )}
 
-          {tab === "login" ? (
-            <div className={styles.footer}>
-              New to HelpDesk?{" "}
-              <div
-                className={styles.link}
-                onClick={() => {
-                  setTab("signup");
-                }}
-              >
-                Sign Up
-              </div>
+        {tab === "login" ? (
+          <div className={styles.footer}>
+            New to HelpDesk?{" "}
+            <div
+              className={styles.link}
+              onClick={() => {
+                setTab("signup");
+              }}
+            >
+              Sign Up
             </div>
-          ) : (
-            <div className={styles.footer}>
-              Already have an account?{" "}
-              <div
-                className={styles.link}
-                onClick={() => {
-                  setTab("login");
-                }}
-              >
-                Login
-              </div>
+          </div>
+        ) : (
+          <div className={styles.footer}>
+            Already have an account?{" "}
+            <div
+              className={styles.link}
+              onClick={() => {
+                setTab("login");
+              }}
+            >
+              Login
             </div>
-          )}
-        </div>
-      </RecoilRoot>
+          </div>
+        )}
+      </div>
     </main>
   );
 }

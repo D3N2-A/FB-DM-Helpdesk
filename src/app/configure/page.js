@@ -1,12 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./page.module.scss";
-import { fbLogin, initFacebookSdk } from "../../../Utils/FIrebaseSDK";
+import { fbLogin, fbLogout, initFacebookSdk } from "../../../Utils/FIrebaseSDK";
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { userState } from "../../../store/userAtom";
 
 function Configure() {
   const router = useRouter();
   const [isConnected, setIsConnected] = useState(false);
+  const [user, setUser] = useRecoilState(userState);
   const handleConnect = async () => {
     initFacebookSdk().then(() => {
       fbLogin().then((response) => {
@@ -14,13 +17,20 @@ function Configure() {
         if (response.status === "connected") {
           console.log("Person is connected");
           localStorage.setItem(
-            "person",
+            "user",
             JSON.stringify({
               status: "connected",
               accessToken: response?.authResponse?.accessToken,
               userID: response?.authResponse?.userID,
             })
           );
+
+          setUser({
+            authenticated: true,
+            userID: response?.authResponse?.accessToken,
+            accessToken: response?.authResponse?.accessToken,
+            isLoading: false,
+          });
           setIsConnected(true);
         } else {
           console.log("Some Error Occured");
@@ -33,7 +43,8 @@ function Configure() {
     router.push("/conversations");
   };
   const deleteIntegration = () => {
-    console.log("Hello");
+    fbLogout();
+    setIsConnected(false);
   };
 
   return (

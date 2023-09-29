@@ -50,3 +50,17 @@ export const fbLogin = () => {
     });
   });
 };
+
+export const fbLogout = () => {
+  return new Promise((resolve, reject) => {
+    window.FB.getLoginStatus((response) => {
+      console.log(response);
+      if (response.status === "connected") {
+        FB.logout(function (response) {
+          console.log(response);
+        });
+        resolve(response);
+      }
+    });
+  });
+};
