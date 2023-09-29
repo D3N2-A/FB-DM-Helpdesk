@@ -78,7 +78,13 @@ function Conversations() {
             conversations.map((chat, index) => {
               console.log(chat);
               return (
-                <div key={index} className={`${styles.chat} ${styles.primary}`}>
+                <div
+                  key={index}
+                  className={`${styles.chat} ${styles.primary}`}
+                  onClick={() => {
+                    setChatData(chat);
+                  }}
+                >
                   <div className={styles.top}>
                     <input type="checkbox" name="" id="" />
                     <div className={styles.title}>

@@ -26,3 +26,12 @@ export function timeConverter(UNIX_timestamp) {
     date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
   return time;
 }
+
+export function UTCTime(dateString) {
+  const dateObj = new Date(dateString);
+  const year = dateObj.getFullYear();
+  const month = (dateObj.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+  const day = dateObj.getDate().toString().padStart(2, "0");
+  const simplifiedDate = `${year}-${month}-${day}`;
+  return simplifiedDate;
+}
