@@ -105,7 +105,7 @@ function Conversations() {
       </div>
 
       <div className={styles.fourth}>
-        <Details />
+        <Details chatData={chatData} />
       </div>
     </div>
   );
