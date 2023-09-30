@@ -19,8 +19,8 @@ All in one solution for managing your Facebook Pages
 
 - [ ] **Q3 2023**:
 
-  - [x] Continue app development
-  - [ ] Develop backend infrastructure for page integration
+  - [x] Continue app development in alpha phase
+  - [x] Develop backend infrastructure for page integration
   - [x] Create a unified inbox and message management system
   - [ ] Implement automated notifications
   - [x] Start building canned response functionality
