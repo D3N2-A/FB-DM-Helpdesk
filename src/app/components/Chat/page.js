@@ -8,8 +8,11 @@ import { toastSuccess } from "../../../../Utils/theme";
 
 function Chat({ chatData }) {
   const [isLoading, setIsLoading] = useState(false);
-  const pageToken = localStorage.getItem("pageToken");
+  const [pageToken, setPageToken] = useState("");
+
   useEffect(() => {
+    const pageToken = localStorage.getItem("pageToken");
+    setPageToken(pageToken);
     fetchMessages(chatData?.id, pageToken);
   }, [chatData]);
 

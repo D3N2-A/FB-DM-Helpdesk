@@ -11,9 +11,9 @@ import { getFacebookLoginStatus } from "../../../Utils/FIrebaseSDK";
 
 function Conversations() {
   const [chatData, setChatData] = useState({});
-  const pageID = localStorage.getItem("pageID");
-  const pageToken = localStorage.getItem("pageToken");
   useEffect(() => {
+    const pageID = localStorage.getItem("pageID");
+    const pageToken = localStorage.getItem("pageToken");
     fetchConversations(pageID, pageToken);
   }, []);
 
